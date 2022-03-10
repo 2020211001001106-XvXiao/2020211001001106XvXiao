@@ -1,4 +1,4 @@
-package com.week2;
+package com.XvXiao.week2;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
