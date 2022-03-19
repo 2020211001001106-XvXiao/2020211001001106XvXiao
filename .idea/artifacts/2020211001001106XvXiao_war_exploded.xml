@@ -13,6 +13,9 @@
         <element id="directory" name="classes">
           <element id="module-output" name="2020211001001106XvXiao" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.microsoft.sqlserver:mssql-jdbc:10.2.0.jre17" />
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/XvXiao2020211001001106-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />

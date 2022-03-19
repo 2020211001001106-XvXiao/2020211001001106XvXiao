@@ -3,30 +3,73 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-
+<!--    set 4 context param = name value-->
+    <context-param>
+        <param-name>driver</param-name>
+        <param-value>com.microsoft.sqlserver.jdbc.SQLServerDriver</param-value>
+    </context-param>
+    <context-param>
+        <param-name>url</param-name>
+        <param-value>jdbc:sqlserver://localhost:1433;database=userdb;encrypt=false</param-value>
+    </context-param>
+    <context-param>
+        <param-name>username</param-name>
+        <param-value>sa</param-value>
+    </context-param>
+    <context-param>
+        <param-name>password</param-name>
+        <param-value>sdlkbldbl..</param-value>
+    </context-param>
+<!--    u can write anywhere within web-app-->
     <servlet>
         <servlet-name>XvXiao</servlet-name>
         <servlet-class>com.XvXiao.week2.HelloWorldServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>LifeCycleServlet</servlet-name>
-        <servlet-class>com.XvXiao.week3.LifeCycleServlet</servlet-class>
-    </servlet>
+<!--    <servlet>-->
+<!--        <servlet-name>LifeCycleServlet</servlet-name>-->
+<!--        <servlet-class>com.XvXiao.week3.LifeCycleServlet</servlet-class>-->
+<!--    </servlet>-->
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>com.XvXiao.week3.RegisterServlet</servlet-class>
     </servlet>
+<!--    <servlet>-->
+<!--        <servlet-name>JDBCDemoServlet</servlet-name>-->
+<!--        <servlet-class>com.XvXiao.week4.JDBCDemoServlet</servlet-class>-->
+<!--&lt;!&ndash;        now u can get there 3 init param in only JDBCDemoServlet&ndash;&gt;-->
+<!--        <init-param>-->
+<!--            <param-name>driver</param-name>-->
+<!--            <param-value>com.microsoft.sqlserver.jdbc.SQLServerDriver</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>url</param-name>-->
+<!--            <param-value>jdbc:sqlserver://localhost:1433;database=userdb;encrypt=false</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>username</param-name>-->
+<!--            <param-value>sa</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>password</param-name>-->
+<!--            <param-value>sdlkbldbl..</param-value>-->
+<!--        </init-param>-->
+<!--        <load-on-startup>1</load-on-startup>&lt;!&ndash;        tell tomcat to load this servlet when tomcat start&ndash;&gt;-->
+<!--    </servlet>-->
     <servlet-mapping>
         <servlet-name>XvXiao</servlet-name>
         <url-pattern>/hello</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>LifeCycleServlet</servlet-name>
-        <url-pattern>/life</url-pattern>
-    </servlet-mapping>
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>LifeCycleServlet</servlet-name>-->
+<!--        <url-pattern>/life</url-pattern>-->
+<!--    </servlet-mapping>-->
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>JDBCDemoServlet</servlet-name>-->
+<!--        <url-pattern>/jdbc</url-pattern>-->
+<!--    </servlet-mapping>-->
 
 </web-app>
