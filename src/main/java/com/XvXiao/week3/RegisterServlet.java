@@ -32,22 +32,23 @@ public class RegisterServlet extends HttpServlet {
 //        String password=config.getInitParameter("password");//<param-name>password</param-name>
 
         //demo #3 - use Servletcontext
-        ServletContext context=getServletContext();
-        String driver=context.getInitParameter("driver");
-        String url=context.getInitParameter("url");
-        String username=context.getInitParameter("username");
-        String password=context.getInitParameter("password");
-
-        //now use 4 variables to get connection
-        try {
-            Class.forName(driver);
-            con= DriverManager.getConnection(url,username,password);
-            System.out.println("Connection --> in Register "+con);//just print for test
-
-            //one connection
-        } catch (ClassNotFoundException| SQLException e) {
-            e.printStackTrace();
-        }
+//        ServletContext context=getServletContext();
+//        String driver=context.getInitParameter("driver");
+//        String url=context.getInitParameter("url");
+//        String username=context.getInitParameter("username");
+//        String password=context.getInitParameter("password");
+//
+//        //now use 4 variables to get connection
+//        try {
+//            Class.forName(driver);
+//            con= DriverManager.getConnection(url,username,password);
+//            System.out.println("Connection --> in Register "+con);//just print for test
+//
+//            //one connection
+//        } catch (ClassNotFoundException| SQLException e) {
+//            e.printStackTrace();
+//        }
+        con=(Connection) getServletContext().getAttribute("con");//name of attribute
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -71,28 +72,35 @@ public class RegisterServlet extends HttpServlet {
 //        writer.close();
 
 
-        String sql="insert into usertable values(?,?,?,?,?)";
         try {
-            //insert data
-            PreparedStatement preparedStatement=con.prepareStatement(sql);
-            preparedStatement.setString(1,username);
-            preparedStatement.setString(2,password);
-            preparedStatement.setString(3,email);
-            preparedStatement.setString(4,gender);
-            preparedStatement.setString(5,birthDate);
-            preparedStatement.execute();
+            Statement st=con.createStatement();
+            String sql="insert into usertable(username,password,email,gender,birthdate)"+
+                    "values('"+username+"','"+password+"','"+email+"','"+gender+"','"+birthDate+"')";
+            System.out.println("sql"+sql);
+            int n=st.executeUpdate(sql);
+            System.out.println("n-->"+n);//==1 succes--insert
 
             //get data and print data
-            PrintWriter out=response.getWriter();
-            sql="select * from usertable";
-            preparedStatement=con.prepareStatement(sql);
-            ResultSet resultSet=preparedStatement.executeQuery();
-            out.println("<html><body>");
-            out.println("<table border='2'>");
-            out.println("<tr><th>ID</th><th>username</th><th>password</th><th>email</th><th>gender</th><th>birthDate</th></tr>");
-            out.println("<tr><th>"+1+"</th><th>"+username+"</th><th>"+password+"</th><th>"+email+"</th><th>"+gender+"</th><th>"+birthDate+"</th></tr>");
-            out.println("</table>");
-            out.println("</body></html>");
+            //PrintWriter out=response.getWriter();
+            //sql="select id,username,password,email,gender,birthdate from usertable";
+            //ResultSet resultSet=st.executeQuery(sql);
+//            out.println("<html><body>");
+//            out.println("<table border='2'>");
+//            out.println("<tr><th>ID</th><th>username</th><th>password</th><th>email</th><th>gender</th><th>birthDate</th></tr>");
+//            out.println("<tr><th>"+1+"</th><th>"+username+"</th><th>"+password+"</th><th>"+email+"</th><th>"+gender+"</th><th>"+birthDate+"</th></tr>");
+//            out.println("</table>");
+//            out.println("</body></html>");
+
+            //user request attribute
+            //set rs into request attribute
+            //request.setAttribute("rsname",resultSet);//name- string value- anytype(object)
+
+            //request.getRequestDispatcher("userList.jsp").forward(request,response);//at this point request given to userList.jsp
+            //no more here
+            //URL doesn't change
+            //System.out.println("i am in RegisterServlet-->doPost-->after forward()");//no see this line
+            //after register user can login
+            response.sendRedirect("login.jsp");
         } catch (SQLException e) {
             e.printStackTrace();
         }

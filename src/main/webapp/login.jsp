@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.io.PrintWriter" %><%--
   Created by IntelliJ IDEA.
   User: Seaaa
   Date: 2022/3/27
@@ -8,6 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="header.jsp"%>
 <h1>Login</h1>
+<%
+    if (!(request.getAttribute("message")==null)){
+        //error
+        out.println("<h3>"+request.getAttribute("message")+"</h3>");
+    }
+%>
 <form method="post" action="login">
     username<input type="text" name="username"/><br/>
     password<input type="password" name="password"/><br/>
