@@ -26,7 +26,20 @@ public class UserDao implements IUserDao{
     @Override
     public int updateUser(Connection con, User user) throws SQLException {
         //update ......where id=?
-        return 0;
+
+        //ToDo 5.1 - write update sql where id =?
+        String sql="update usertable set username=?,password=?,email=?,gender=?,birthDate=? where id=?";
+        //Todo 5.2 - create prepared statement
+        PreparedStatement preparedStatement=con.prepareStatement(sql);
+        preparedStatement.setString(1,user.getUsername());
+        preparedStatement.setString(2,user.getPassword());
+        preparedStatement.setString(3,user.getEmail());
+        preparedStatement.setString(4,user.getGender());
+        preparedStatement.setString(5,user.getBirthDate());
+        //ToDo 5.3 - executeUpdate()
+        preparedStatement.execute();
+        //ToDo 5.4 - return int
+        return 1;
     }
 
     @Override
@@ -45,17 +58,20 @@ public class UserDao implements IUserDao{
         preparedStatement.setString(2,password);
         ResultSet resultSet=preparedStatement.executeQuery();
         User user=null;
-        if (resultSet.next()){
-            //get from resultSet and set into user model
-            user=new User();
-            user.setId(resultSet.getInt("id"));
-            user.setUsername(resultSet.getString("username"));
-            user.setPassword(resultSet.getString("password"));
-            user.setEmail(resultSet.getString("email"));
-            user.setGender(resultSet.getString("gender"));
-            user.setBirthDate(resultSet.getDate("birthdate"));
-        }
-        return null;
+
+            if (resultSet.next()){
+                //get from resultSet and set into user model
+                user=new User();
+                user.setId(resultSet.getInt("id"));
+                user.setUsername(resultSet.getString("username"));
+                user.setPassword(resultSet.getString("password"));
+                user.setEmail(resultSet.getString("email"));
+                user.setGender(resultSet.getString("gender"));
+                user.setBirthDate(resultSet.getString("birthdate"));
+            }
+
+
+        return user;
     }
 
     @Override

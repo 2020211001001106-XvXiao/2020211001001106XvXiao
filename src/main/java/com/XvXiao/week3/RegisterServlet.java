@@ -100,6 +100,8 @@ public class RegisterServlet extends HttpServlet {
             //URL doesn't change
             //System.out.println("i am in RegisterServlet-->doPost-->after forward()");//no see this line
             //after register user can login
+
+
             response.sendRedirect("login.jsp");
         } catch (SQLException e) {
             e.printStackTrace();
