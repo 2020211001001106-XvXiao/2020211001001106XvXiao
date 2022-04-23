@@ -91,4 +91,35 @@
         <welcome-file>home</welcome-file>//when you run app first request send to home...  Homeservlet
     </welcome-file-list>
 
+    <!--chain of filters -->
+    <!-- 1st -->
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>com.XvXiao.filter.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/hello</url-pattern>
+    </filter-mapping>
+    <!-- 2nd - write after 1st one in web.xml -->
+    <filter>
+        <filter-name>HelloFilter</filter-name>
+        <filter-class>com.XvXiao.filter.HelloFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HelloFilter</filter-name>
+        <url-pattern>/hello</url-pattern>
+    </filter-mapping>
+    <!--3nd one-->
+    <filter>
+        <filter-name>LoggerFilter</filter-name>
+        <filter-class>com.XvXiao.filter.LoggerFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoggerFilter</filter-name>
+        <url-pattern>/hello</url-pattern>
+    </filter-mapping>
+
+
+
 </web-app>
