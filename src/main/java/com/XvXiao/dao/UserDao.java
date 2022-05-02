@@ -36,8 +36,9 @@ public class UserDao implements IUserDao{
         preparedStatement.setString(3,user.getEmail());
         preparedStatement.setString(4,user.getGender());
         preparedStatement.setString(5,user.getBirthDate());
+        preparedStatement.setInt(6,user.getId());
         //ToDo 5.3 - executeUpdate()
-        preparedStatement.execute();
+        preparedStatement.executeUpdate();
         //ToDo 5.4 - return int
         return 1;
     }

@@ -32,6 +32,7 @@ public class JDBCServletContextListener implements ServletContextListener {
             context.setAttribute("con",con);
         } catch (ClassNotFoundException| SQLException e) {
             e.printStackTrace();
+
         }
 
     }
