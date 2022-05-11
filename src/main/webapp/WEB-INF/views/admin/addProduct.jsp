@@ -30,8 +30,15 @@
 				               	<select name="categoryId">
 										<option >-- Category --</option>
 											<!-- loop_start -->
-											
-										<option value=""></option>
+										<!--later we will make it dynamic-->
+										<option value="1">FASHION</option>
+									<option value="2">HOUSEHOLD</option>
+									<option value="3">INTERIORS</option>
+									<option value="4">CLOTHING</option>
+									<option value="5">BAGS</option>
+									<option value="6">SHOES</option>
+									<option value="7">BOOKS</option>
+									<option value="8">OTHERS</option>
 										
 										<!-- loop_end -->
 										
