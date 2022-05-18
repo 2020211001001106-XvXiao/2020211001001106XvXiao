@@ -25,6 +25,24 @@
         <servlet-name>XvXiao</servlet-name>
         <servlet-class>com.XvXiao.week2.HelloWorldServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>lab1LifeCycleServlet</servlet-name>
+        <servlet-class>com.XvXiao.lab1.lab1LifeCycleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>lab1LifeCycleServlet</servlet-name>
+        <url-pattern>/lab1Life</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>lab1MyDearServlet</servlet-name>
+        <servlet-class>com.XvXiao.lab1.lab1MyDearServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>lab1MyDearServlet</servlet-name>
+        <url-pattern>/lab1MyDear</url-pattern>
+    </servlet-mapping>
 <!--    <servlet>-->
 <!--        <servlet-name>LifeCycleServlet</servlet-name>-->
 <!--        <servlet-class>com.XvXiao.week3.LifeCycleServlet</servlet-class>-->
