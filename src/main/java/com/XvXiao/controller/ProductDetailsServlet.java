@@ -1,6 +1,7 @@
 package com.XvXiao.controller;
 
 import com.XvXiao.dao.ProductDao;
+import com.XvXiao.model.Category;
 import com.XvXiao.model.Product;
 
 import javax.servlet.*;
@@ -11,8 +12,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "ProductListServlet", value = "/admin/productList")
-public class ProductListServlet extends HttpServlet {
+@WebServlet(name = "ProductDetailsServlet", value = "/productDetails")
+public class ProductDetailsServlet extends HttpServlet {
     Connection con=null;
 
     @Override
@@ -23,19 +24,28 @@ public class ProductListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        //week 12
-        ProductDao productDao=new ProductDao();
         try {
-            List<Product> productList=productDao.findAll(con);
-            request.setAttribute("productList",productList);
-
+            List<Category> categoryList=Category.findAllCategory(con);
+            request.setAttribute("categoryList",categoryList);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        String path="/WEB-INF/views/admin/productList.jsp";
+        try {
+            if (request.getParameter("id") != null) {
+                int productId = Integer.parseInt(request.getParameter("id"));
+                ProductDao productDao = new ProductDao();
+                Product product = productDao.findById(productId, con);
+                request.setAttribute("p",product);
+            }
+        }
+        //get product by id
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //forward
+        String path="/WEB-INF/views/productDetails.jsp";
         request.getRequestDispatcher(path).forward(request,response);
+
     }
 
     @Override

@@ -1,4 +1,4 @@
-<%--
+<<%--
   Created by IntelliJ IDEA.
   User: Seaaa
   Date: 2022/5/18
@@ -12,11 +12,12 @@
 </head>
 <body>
 <h2>I am in lab1MyJsp.jsp</h2>
-<form method="get" action="lab1MyDear">
+<form method="post" action="lab1MyDearJsp.jsp">
     name:<input type="text" name="name"><br/>
     class:<input type="text" name="class"><br/>
     ID:<input type="text" name="id"><br/>
-    <input type="submit" value="Send data to server"/>
+    <input type="submit" name="submit" value="Send data to server"/>
 </form>
+<h2>2020211001001106 XvXiao</h2>
 </body>
 </html>
