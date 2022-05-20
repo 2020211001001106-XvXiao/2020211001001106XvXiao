@@ -1,5 +1,6 @@
 <%@include file="../header.jsp" %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <section id="z`z`">
 		<div class="container">
 		<div class="breadcrumbs">
@@ -35,27 +36,35 @@
 					</thead>
 					<tbody>
 					<!-- loop_start -->
-					
+					<sql:setDataSource var="myDS"
+									   driver="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+									   url="jdbc:sqlserver://localhost:1433;database=userdb"
+									   user="sa"
+									   password="sdlkbldbl.."/>
+					<sql:query var="allUser" dataSource="${myDS}" >
+						select * from usertable;
+					</sql:query>
+					<c:forEach var="row" items="${allUser.rows}">
 						<tr>
 							<td class="cart_description">
-								<p>username</p>
+								<p>${row.username}</p>
 							</td>
 								<td class="cart_description">
-								<p>password</p>
+								<p>${row.password}</p>
 							</td>
 							<td class="cart_description">
-								<p>email </p>
+								<p>${row.email} </p>
 							</td>
 							<td class="cart_description">
-							<p>gender </p>
+							<p>${row.gender} </p>
 							</td>
 							<td class="cart_description">
-								<p >birthDate</p>
+								<p >${row.birthDate}</p>
 							</td>
 							
 							<td class="cart_delete">
-							   <a class="cart_quantity_update" href="<%=basePath %>admin/userEdit?userId=id" ><i class="fa fa-edit"></i></a>
-								<a class="cart_quantity_delete" href="<%=basePath%>admin/userDelete?userId=id" ><i class="fa fa-times"></i></a>
+							   <a class="cart_quantity_update" href="<%=basePath %>admin/userEdit?userId=${row.id}" ><i class="fa fa-edit"></i></a>
+								<a class="cart_quantity_delete" href="<%=basePath%>admin/userDelete?userId=${row.id}" ><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
 						</c:forEach>
