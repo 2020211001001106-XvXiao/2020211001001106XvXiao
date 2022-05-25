@@ -3,6 +3,7 @@ package com.XvXiao.controller;
 import com.XvXiao.dao.ProductDao;
 import com.XvXiao.model.Item;
 import com.XvXiao.model.Product;
+import com.sun.org.apache.bcel.internal.generic.ACONST_NULL;
 import com.sun.xml.internal.ws.developer.UsesJAXBContext;
 import sun.java2d.windows.GDIWindowSurfaceData;
 
@@ -34,11 +35,13 @@ public class CartServlet extends HttpServlet {
                     displayCart(request,response);
                 }else if(request.getParameter("action").equals("add")) {
                     try {
+                        System.out.println("add");
                         buy(request,response);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
                 }else if (request.getParameter("action").equals("remove")){
+                    System.out.println("remove");
                     remove(request,response);
                 }
             }else {
@@ -60,19 +63,15 @@ public class CartServlet extends HttpServlet {
         }
     }
 
-    private void buy(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+    private void buy(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         //add item into cart -
-        HttpSession session=request.getSession(false);
+        HttpSession session=request.getSession();
         int id=request.getParameter("productId")!=null?Integer.parseInt(request.getParameter("productId")):0;
         int quantity=request.getParameter("quantity")!=null?Integer.parseInt(request.getParameter("quantity")):0;
-            if(id==0||quantity==0){
-                //error
-                return;
-            }
             ProductDao productDao=new ProductDao();
             if(session.getAttribute("cart")==null){
                 //create a new cart
-                List<Item> cart=new ArrayList<>();
+                List<Item> cart=new ArrayList<Item>();
                 Product p=productDao.findById(id,con);
                 cart.add(new Item(p,quantity));
                 session.setAttribute("cart",cart);
@@ -92,6 +91,7 @@ public class CartServlet extends HttpServlet {
                 }
                 session.setAttribute("cart",cart);
             }//end else
+        response.sendRedirect(request.getContextPath()+"/cart");
     }
 
     private int isExisting(int id, List<Item> cart) {

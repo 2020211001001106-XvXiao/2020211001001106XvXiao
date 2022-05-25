@@ -67,9 +67,9 @@ public class LoginServlet extends HttpServlet {
                     Cookie passwordCookie=new Cookie("cPassword",user.getPassword());
                     Cookie rememberMeCookie=new Cookie("cRememberMe",rememberMe);
                     //set age of cookies
-                    usernameCookie.setMaxAge(5);//5 sec - test --- 15 days = 60*60*24*15
-                    passwordCookie.setMaxAge(5);
-                    rememberMeCookie.setMaxAge(5);
+                    usernameCookie.setMaxAge(60*60*24*15);//5 sec - test --- 15 days = 60*60*24*15
+                    passwordCookie.setMaxAge(60*60*24*15);
+                    rememberMeCookie.setMaxAge(60*60*24*15);
                     //add 3 cookies into response
                     response.addCookie(usernameCookie);
                     response.addCookie(passwordCookie);
