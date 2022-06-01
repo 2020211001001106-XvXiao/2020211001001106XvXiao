@@ -123,7 +123,7 @@
     <!-- 1st -->
     <filter>
         <filter-name>AuthFilter</filter-name>
-        <filter-class>com.XvXiao.filter.AuthFilter</filter-class>
+        <filter-class>com.XvXiao.week2.filter.AuthFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
@@ -132,7 +132,7 @@
     <!-- 2nd - write after 1st one in web.xml -->
     <filter>
         <filter-name>HelloFilter</filter-name>
-        <filter-class>com.XvXiao.filter.HelloFilter</filter-class>
+        <filter-class>com.XvXiao.week2.filter.HelloFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>HelloFilter</filter-name>
@@ -141,7 +141,7 @@
     <!--3nd one-->
     <filter>
         <filter-name>LoggerFilter</filter-name>
-        <filter-class>com.XvXiao.filter.LoggerFilter</filter-class>
+        <filter-class>com.XvXiao.week2.filter.LoggerFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>LoggerFilter</filter-name>

@@ -77,34 +77,35 @@
 						<tbody>
 					
 					<!-- loop_start -->
-					
+					<c:forEach var="o" items="${orderList}">
 						<tr>
-						<td>OID:order Id</td>
-						<td>order Date</td>
+						<td>OID:${o.orderId}</td>
+						<td>${o.orderDate}</td>
 						<%
-							com.dabing.model.Order o=(com.dabing.model.Order)pageContext.findAttribute("o");
+							com.XvXiao.model.Order o=(com.XvXiao.model.Order)pageContext.findAttribute("o");
 							int userId=o.getCustomerId();
 							java.sql.Connection con=(java.sql.Connection)application.getAttribute("con");
-							com.dabing.dao.UserDao userDao=new com.dabing.dao.UserDao();
+							com.XvXiao.dao.UserDao userDao=new com.XvXiao.dao.UserDao();
 							String customerName=userDao.findById(con, userId).getUsername();
 							 %>
 						 <td><%=customerName %></td>
 						<td>
-						<p>first Name last Name<p> 
-						<p> address1</p>
-						<p>address2</p>
-						<p>city,state,country-postalCode</p><p>phone</p></td>
-						<td class="cart_total">
+						<p>${o.firstName} ${o.lastName}<p>
+						<p> ${o.address1}</p>
+						<p>${o.address2}</p>
+						<p>${o.city},${o.state},${o.country}-${o.postalCode}</p><p>${o.phone}</p></td>
+						<td class="cart_total">${o.paymentId}
 						<%
 							int n=o.getPaymentId();
-							String paymentType=com.dabing.model.Payment.findByPaymentId(con,n);
+							String paymentType=com.XvXiao.model.Payment.findByPaymentId(con,n);
 							 %>
 								<p class="cart_total_price"><%=paymentType %></p>
 							</td>
 						<td><button class="btn btn-default update" id="${o.orderId }">Details</button></td>
 							</tr>
 							<tr>
-							
+
+								</c:forEach>
 						<!-- loop_end -->
 						
 					</tbody>
